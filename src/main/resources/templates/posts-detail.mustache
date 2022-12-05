@@ -1,0 +1,48 @@
+{{>layout/header}}
+
+<h1 style="margin-bottom: 20px">게시글 내용 조회</h1>
+
+<div class="col-md-12">
+    <form>
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+                <tr>
+                    <th>게시글<p style="display: inline" id="id">{{post.id}}</p></th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td><p style="font-size: 25pt" id="title">{{post.title}}</p><p id="author">{{post.author}}</p></td>
+                </tr>
+                <tr>
+                    <td id="content">{{post.content}}</td>
+                </tr>
+                <tr>
+                    <td style="justify-content: end">
+                        <button type="button" class="btn btn-primary"><a href="/posts/update/{{post.id}}" style="text-decoration: none; color: white">게시글 수정</a></button>
+                        <button type="button" class="btn btn-danger" id="btn-delete">게시글 삭제</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p id="email">{{user.email}}</p>
+                        <textarea class="form-control" id="replyContent" placeholder="댓글 내용을 입력하세요"></textarea>
+                        <button type="button" class="btn btn-primary" id="btn-reply-save">등록</button>
+                    </td>
+                </tr>
+                {{#replies}}
+                    <tr>
+                        <td>
+                            <p>{{name}}</p>
+                            <p>{{replyContent}}</p>
+                            <button type="button" class="btn btn-danger" onclick="main.replyDelete({{id}})">댓글 삭제</button>
+                        </td>
+                    </tr>
+                {{/replies}}
+            </tbody>
+        </table>
+    </form>
+
+</div>
+
+{{>layout/footer}}

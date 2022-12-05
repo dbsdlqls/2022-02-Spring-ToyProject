@@ -12,6 +12,9 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+        $('#btn-reply-save').on('click', function () {
+            _this.replySave();
+        });
     },
     save : function () {
         var data = {
@@ -55,7 +58,7 @@ var main = {
         });
     },
     delete : function () {
-        var id = $('#id').val();
+        var id = $('#id').text();
 
         $.ajax({
             type: 'DELETE',
@@ -68,8 +71,43 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+    replySave : function () {
+        var data = {
+            pid: $('#id').text(),
+            email: $('#email').text(),
+            replyContent: $('#replyContent').val()
+        };
 
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/reply',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('댓글이 등록되었습니다.');
+            window.location.href = '/posts/getDetail/'+data.pid;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    },
+    replyDelete: function (rid) {
+        var pid = $('#id').text();
+        var email = $('#email').text();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/reply/'+rid+'?email='+email,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            alert('댓글이 삭제되었습니다.');
+            window.location.href = '/posts/getDetail/'+pid;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    }
 };
 
 main.init();
