@@ -2,6 +2,7 @@ package com.jojoldu.book.springboot.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MyPageController {
 
-    @GetMapping("")
+    @GetMapping("/mypage")
     public String myPageHome(/*Model model, @AuthenticationPrincipal Member currentMember*/ ) {
 //        List<Category> categoryList = categoryService.findAll();
 //
@@ -29,20 +30,6 @@ public class MyPageController {
     public String mypageEditForm(){
         return "mypage/edit";
     }
-
-    @PostMapping("/mypage/edit")
-    public String mypageEdit(){
-        return "mypage/edit";
-    }
-
-    /**
-     * 내가 쓴 게시글 보기
-     */
-    @GetMapping("/mypage/posts")
-    public String viewPosts() {
-        return "mypage/posts";
-    }
-
     /**
      * 내가 좋아요한 글
      */
@@ -61,7 +48,7 @@ public class MyPageController {
      * 탈퇴하기 기능
      * 다시 홈으로 들어감
      */
-    @GetMapping("/mypage/delete")
+    @DeleteMapping("/mypage")
     public String mypageDelete() {
         return "/";
     }
