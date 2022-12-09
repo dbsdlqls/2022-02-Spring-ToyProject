@@ -2,8 +2,10 @@ package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
+import com.jojoldu.book.springboot.service.heart.HeartService;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.reply.ReplyService;
+import com.jojoldu.book.springboot.web.dto.HeartResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.ReplyResponseDto;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import java.util.List;
 public class IndexController {
     private final PostsService postsService;
     private final ReplyService replyService;
+
+    private  final HeartService heartService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){
@@ -67,5 +71,12 @@ public class IndexController {
         model.addAttribute("replies", replies);
 
         return "mypage-reply";
+    }
+    @GetMapping("/mypage/like")
+    public String myLike(Model model, @LoginUser SessionUser user){
+        List<HeartResponseDto> hearts = heartService.findAllByUser(user.getEmail());
+        model.addAttribute("hearts", hearts);
+
+        return "mypage-like";
     }
 }

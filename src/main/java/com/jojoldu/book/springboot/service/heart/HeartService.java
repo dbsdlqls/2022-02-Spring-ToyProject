@@ -7,11 +7,15 @@ import com.jojoldu.book.springboot.domain.posts.PostsRepository;
 import com.jojoldu.book.springboot.domain.user.User;
 import com.jojoldu.book.springboot.domain.user.UserRepository;
 import com.jojoldu.book.springboot.web.dto.HeartDto;
+import com.jojoldu.book.springboot.web.dto.HeartResponseDto;
+import com.jojoldu.book.springboot.web.dto.ReplyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,6 +67,16 @@ public class HeartService {
             throw new RuntimeException("사용자가 누른 하트만 취소가능.");
         }
         return deleteHeartId;
+    }
+
+    public List<HeartResponseDto> findAllByUser(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email="+email));
+
+        return heartRepository.findAllByUid(user.getId())
+                .stream()
+                .map(HeartResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 //    public List<ReplyResponseDto> findAllByUser(Long uid){
