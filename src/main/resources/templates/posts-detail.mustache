@@ -12,10 +12,16 @@
             </thead>
             <tbody id="tbody">
                 <tr>
-                    <td><p style="font-size: 25pt" id="title">{{post.title}}</p><p id="author">{{post.author}}</p></td>
+                    <td>
+                        <p style="font-size: 25pt" id="title">{{post.title}}</p>
+                        <div style="display: flex; justify-content: space-between">
+                            <p id="author">{{post.author}}</p>
+                            <p style="display: inline; color: darkgrey">{{post.modifiedDate}}</p>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td id="content">{{post.content}}</td>
+                    <td id="content" style="white-space: pre">{{post.content}}</td>
                 </tr>
                 <tr>
                     <td style="justify-content: end">
@@ -58,7 +64,7 @@
                 {{#replies}}
                     <tr>
                         <td>
-                            <p>{{name}}</p>
+                            <p style="display:inline">{{name}}<div style="display: inline-block; color: darkgrey">{{modifiedDate}}</div></p>
                             <p>{{replyContent}}</p>
                             <button type="button" class="btn btn-danger" onclick="main.replyDelete({{id}})">댓글 삭제</button>
                         </td>

@@ -53,4 +53,19 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    @GetMapping("/mypage")
+    public String myPage(Model model, @LoginUser SessionUser user){
+        model.addAttribute("user", user);
+
+        return "mypage";
+    }
+
+    @GetMapping("/mypage/reply")
+    public String myReply(Model model, @LoginUser SessionUser user){
+        List<ReplyResponseDto> replies = replyService.findAllByUser(user.getEmail());
+        model.addAttribute("replies", replies);
+
+        return "mypage-reply";
+    }
 }

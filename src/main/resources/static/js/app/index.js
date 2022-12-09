@@ -77,7 +77,7 @@ var main = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('글이 수정되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/posts/getDetail/'+id;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -117,13 +117,13 @@ var main = {
             alert(JSON.stringify(error));
         })
     },
-    replyDelete: function () {
+    replyDelete: function (rid) {
         var pid = $('#id').text();
         var email = $('#email').text();
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/reply/' + '?email='+email,
+            url: '/api/v1/reply/' + rid + '?email='+email,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function () {

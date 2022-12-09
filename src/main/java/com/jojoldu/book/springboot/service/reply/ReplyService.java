@@ -64,4 +64,14 @@ public class ReplyService {
                 .map(ReplyResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public List<ReplyResponseDto> findAllByUser(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email="+email));
+
+        return replyRepository.findAllByUid(user.getId())
+                .stream()
+                .map(ReplyResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

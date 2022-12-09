@@ -1,0 +1,21 @@
+{{>layout/header}}
+
+<h1>마이페이지</h1>
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center">
+    <img src="{{user.picture}}" alt="profile" style="border-radius: 70%">
+    <div style="margin-top: 30px"><h2 style="display: inline; color: #1d44ff">{{user.name}}</h2><h2 style="display: inline">님, 환영합니다</h2></div>
+    <br>
+    <p style="color: crimson">탈퇴하기</p>
+    <br>
+    <div style="width: 100%; display: flex; justify-content: center; align-items: center; text-align: center">
+        <h2 style="display: inline; border: 1px solid gainsboro; border-radius: 5px; width: 35%; line-height: 200px; margin-right: 5px">
+            <a href="/mypage/reply" style="color: #1d44ff">내가 쓴 댓글 보기</a>
+        </h2>
+        <h2 style="display: inline; border: 1px solid gainsboro; border-radius: 5px; width: 35%; line-height: 200px; margin-left: 5px">
+            <a style="color: #1d44ff">내 좋아요 보기</a>
+        </h2>
+    </div>
+</div>
+
+{{>layout/footer}}

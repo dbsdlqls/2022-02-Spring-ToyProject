@@ -1,0 +1,26 @@
+{{>layout/header}}
+
+<h1>내가 쓴 댓글</h1>
+<br>
+<div class="col-md-12">
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글 번호</th>
+            <th>내가 쓴 댓글</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#replies}}
+            <tr>
+                <td><a href="/posts/getDetail/{{pid}}">{{pid}}</a></td>
+                <td>{{replyContent}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/replies}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}
