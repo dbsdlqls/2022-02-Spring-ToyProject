@@ -8,7 +8,6 @@ import com.jojoldu.book.springboot.domain.user.User;
 import com.jojoldu.book.springboot.domain.user.UserRepository;
 import com.jojoldu.book.springboot.web.dto.HeartDto;
 import com.jojoldu.book.springboot.web.dto.HeartResponseDto;
-import com.jojoldu.book.springboot.web.dto.ReplyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +51,6 @@ public class HeartService {
         Posts post = postsRepository.findById(heartDto.getPid())
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + heartDto.getPid()));
 
-//        User user = userRepository.findByEmail(heartDto.getEmail())
-//                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id=" + heartDto.getEmail()));
-
         Heart heart = heartRepository.findByPost(post)
                 .orElseThrow(() -> new IllegalArgumentException("해당 좋아요가 없습니다"));
 
@@ -78,11 +74,4 @@ public class HeartService {
                 .map(HeartResponseDto::new)
                 .collect(Collectors.toList());
     }
-
-//    public List<ReplyResponseDto> findAllByUser(Long uid){
-//        return heartRepository.findAllByUid(uid)
-//                .stream()
-//                .map(ReplyResponseDto::new)
-//                .collect(Collectors.toList());
-//    }
 }

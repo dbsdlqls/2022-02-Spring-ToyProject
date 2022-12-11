@@ -21,11 +21,7 @@ public class HeartController {
 
     @DeleteMapping
     public Long deleteHeart(@RequestBody HeartDto heartDto) {
-        System.out.println("===========HeartController.deleteHeart");
         return heartService.deleteHeart(heartDto);
     }
-//    @GetMapping("/user/{id}")
-//    public List<HeartDto> findByUser(@PathVariable Long id){
-//        return heartService.findAllByUser(id);
-//    }
+
 }

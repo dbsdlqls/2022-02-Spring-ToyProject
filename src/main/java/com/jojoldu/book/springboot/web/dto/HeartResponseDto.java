@@ -1,7 +1,6 @@
 package com.jojoldu.book.springboot.web.dto;
 
 import com.jojoldu.book.springboot.domain.Heart.Heart;
-import com.jojoldu.book.springboot.domain.reply.Reply;
 import lombok.Data;
 
 import java.time.format.DateTimeFormatter;
