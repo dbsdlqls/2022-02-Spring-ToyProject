@@ -7,11 +7,14 @@ import com.jojoldu.book.springboot.domain.posts.PostsRepository;
 import com.jojoldu.book.springboot.domain.user.User;
 import com.jojoldu.book.springboot.domain.user.UserRepository;
 import com.jojoldu.book.springboot.web.dto.HeartDto;
+import com.jojoldu.book.springboot.web.dto.HeartResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,9 +51,6 @@ public class HeartService {
         Posts post = postsRepository.findById(heartDto.getPid())
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + heartDto.getPid()));
 
-//        User user = userRepository.findByEmail(heartDto.getEmail())
-//                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id=" + heartDto.getEmail()));
-
         Heart heart = heartRepository.findByPost(post)
                 .orElseThrow(() -> new IllegalArgumentException("해당 좋아요가 없습니다"));
 
@@ -65,10 +65,13 @@ public class HeartService {
         return deleteHeartId;
     }
 
-//    public List<ReplyResponseDto> findAllByUser(Long uid){
-//        return heartRepository.findAllByUid(uid)
-//                .stream()
-//                .map(ReplyResponseDto::new)
-//                .collect(Collectors.toList());
-//    }
+    public List<HeartResponseDto> findAllByUser(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email="+email));
+
+        return heartRepository.findAllByUid(user.getId())
+                .stream()
+                .map(HeartResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
