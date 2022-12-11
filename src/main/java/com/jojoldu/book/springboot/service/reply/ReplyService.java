@@ -41,7 +41,7 @@ public class ReplyService {
     public void delete(Long id, String email){
         Reply reply = replyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
-        System.out.println("email: "+email+"getEmail: "+reply.getUser().getEmail());
+
         if(email.equals(reply.getUser().getEmail())){
             replyRepository.delete(reply);
         }
@@ -58,6 +58,7 @@ public class ReplyService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public List<ReplyResponseDto> findAllByUser(Long uid){
         return replyRepository.findAllByUid(uid)
                 .stream()
@@ -65,6 +66,7 @@ public class ReplyService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public List<ReplyResponseDto> findAllByUser(String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email="+email));

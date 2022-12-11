@@ -133,6 +133,22 @@ var main = {
             alert(JSON.stringify(error));
         })
     },
+    userDelete: function () {
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/user',
+            dataType: 'text',
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                window.location.href = '/logout';
+            }
+        }).done(function () {
+            alert('탈퇴되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    },
 
     onLike : function () {
         var data = {

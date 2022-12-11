@@ -18,7 +18,6 @@ public class ReplyApiController {
 
     @DeleteMapping("/{id}")
     public Long delete(@PathVariable Long id, @RequestParam String email){
-        System.out.println("rid: "+id+" email:"+email);
         replyService.delete(id, email);
         return id;
     }
