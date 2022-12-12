@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,5 +74,15 @@ public class HeartService {
                 .stream()
                 .map(HeartResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Heart> checkExistHeart(Long pid){
+        Posts post = postsRepository.findById(pid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + pid));
+
+        if (!heartRepository.existsByPost(post)) {
+            return Optional.empty();
+        }
+        return heartRepository.findByPost(post);
     }
 }
