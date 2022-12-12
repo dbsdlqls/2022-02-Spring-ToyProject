@@ -2,6 +2,7 @@ package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
+import com.jojoldu.book.springboot.domain.Heart.Heart;
 import com.jojoldu.book.springboot.service.heart.HeartService;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.reply.ReplyService;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -42,11 +44,15 @@ public class IndexController {
     public String postsDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         PostsResponseDto dto = postsService.findById(id);
         List<ReplyResponseDto> replies = replyService.findAllByPost(id);
+        Optional<Heart> heart = heartService.checkExistHeart(id);
 
         model.addAttribute("post", dto);
         model.addAttribute("user", user);
         model.addAttribute("replies", replies);
 
+        if (heart.isPresent()) {
+            model.addAttribute("heart", heart);
+        }
         return "posts-detail";
     }
 

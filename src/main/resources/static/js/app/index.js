@@ -2,12 +2,6 @@ var main = {
     init : function () {
         var _this = this;
 
-        //초기값의 경우
-        if ($('#btn-heart-on').css('display') != null && $('#btn-heart-off').css('display') != null) {
-            $('#btn-heart-off').css('display', 'block');
-            $("#btn-heart-on").css('display', 'none');
-        }
-
         $('#btn-save').on('click', function () {
             _this.save();
         });
@@ -32,15 +26,7 @@ var main = {
             _this.offLike();
         });
     },
-//    heartBtn : function () {
-//        if ($('#btn-heart-on').css('display') == 'none') { // 좋아요 안 누름
-//            $('#btn-heart-off').css('display', 'none');
-//            $("#btn-heart-on").css('display', 'block');
-//        } else { // 좋아요 누름
-//            $('#btn-heart-off').css('display', 'block');
-//            $("#btn-heart-on").css('display', 'none');
-//        }
-//    },
+
     save : function () {
         var data = {
             title: $('#title').val(),
@@ -148,9 +134,7 @@ var main = {
             data: JSON.stringify(data),
             success: function () {
                 alert('좋아요 🤍');
-                $('#btn-heart-off').css('display', 'none');
-                $("#btn-heart-on").css('display', 'block');
-                //window.location.href = '/posts/getDetail/' + data.pid;
+                window.location.href = '/posts/getDetail/' + data.pid;
             }, error: function (error) {
                 alert(data);
                 alert(JSON.stringify(error));
@@ -171,9 +155,7 @@ var main = {
             data: JSON.stringify(data),
             success: function () {
                 alert('좋아요 취소');
-                $('#btn-heart-off').css('display', 'block');
-                $("#btn-heart-on").css('display', 'none');
-                //window.location.href = '/posts/getDetail/' + data.pid;
+                window.location.href = '/posts/getDetail/' + data.pid;
             },error: function (error) {
                 alert(JSON.stringify(error));
             }

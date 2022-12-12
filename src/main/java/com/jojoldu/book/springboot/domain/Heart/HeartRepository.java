@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface HeartRepository extends JpaRepository<Heart, Long> {
     Optional<Heart> findByPost(Posts post);
 
+    boolean existsByPost(Posts posts);
+
     @Query("SELECT r FROM Heart r WHERE r.user.id = :uid")
     List<Heart> findAllByUid(@Param("uid") Long uid);
 

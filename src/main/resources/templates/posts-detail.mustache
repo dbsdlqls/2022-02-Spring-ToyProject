@@ -31,24 +31,22 @@
                 </tr>
                 <tr>
                     <td>
-<!--                        <div id="heart">-->
-<!--                            <button id="btn-heart-on">-->
-<!--                                <img class="rounded-circle btn-heart-img" id="btn-heart-img" src="/images/heartOn.png" width="60px" height="60px">-->
-<!--                            </button>-->
-<!--                            <button id="btn-heart-off">-->
-<!--                                <img class="rounded-circle btn-heart-img" id="btn-heart-img" src="/images/heartOff.png" width="60px" height="60px">-->
-<!--                            </button>-->
-<!--                        </div>-->
+                        <div id="heart-zone">
+                            <!--heart 가 없는 경우-->
+                            {{^heart}}
+                                <div id="btn-heart-off">
+                                    <img id="btn-heart-off-img" src="/images/heartOff.png"
+                                         width="60px" height="60px">
+                                </div>
+                            {{/heart}}
 
-                        <div>
-                            <div id="btn-heart-on">
-                                <img id="btn-heart-on-img" src="/images/heartOn.png"
-                                     width="60px" height="60px">
-                            </div>
-                            <div id="btn-heart-off">
-                                <img id="btn-heart-off-img" src="/images/heartOff.png"
-                                     width="60px" height="60px">
-                            </div>
+                            {{#heart}}
+                                <div id="btn-heart-on">
+                                    <img id="btn-heart-on-img" src="/images/heartOn.png"
+                                         width="60px" height="60px">
+                                </div>
+                            {{/heart}}
+
                         </div>
 
                     </td>
